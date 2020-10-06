@@ -1,4 +1,4 @@
-function [Road,z] = RoadSolver (IRI, IRI_last, z_last)
+function Road = RoadSolver (IRI, IRI_last, z_last)
 k_1 = 653;
 k_2 = 63.3;
 c = 6;
@@ -10,18 +10,18 @@ iri_z = [L*IRI
          (IRI - IRI_last)*L
          L*IRI
          (IRI - IRI_last)*L];
-z_jacobian =[0 0 1 0
-             0 0 0 1
+z_jacobian =[0 0 -1 0
+             0 0 0 -1
              1 0 0 0
              0 1 0 0];
- z_X = [z_s_prime, z_s_dot_prime,z_u_prime, z_u_dot_prime];
+ z_X = [z_s_prime, z_s_dot_prime,z_u_prime, z_u_dot_prime]';
  
  z = iri_z +(z_jacobian * z_X);
  
  A = [0 1 0 0
      -k_2 -c k_2 c
      0 0 0 1
-     (k_2/mu) (c/mu) ((k_2 - k_1)/mu) -(c/mu)];
+     (k_2/mu) (c/mu) ((k_2 + k_1)/mu) -(c/mu)];
 X = z_last;
 
 B = [0
