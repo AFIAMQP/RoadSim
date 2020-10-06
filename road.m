@@ -3,7 +3,7 @@ classdef road < matlab.System
        IRI 
        numSteps
        IRIArray
-       FlowInput
+       Input
     end
     methods 
         function newRoad(obj,IRI, numSteps)
