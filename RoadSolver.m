@@ -3,9 +3,10 @@ k_1 = 653;
 k_2 = 63.3;
 c = 6;
 mu = 0.15;  
-L = 250;
-syms R
-syms z_s_prime z_s_dot_prime z_u_prime z_u_dot_prime
+L = 1 %250;
+syms  R
+syms z_s_prime z_s_dot_prime z_u_prime z_u_dot_prime 
+z_u_prime = IRI - z_last(2);
 iri_z = [L*IRI 
          (IRI - IRI_last)*L
          L*IRI
