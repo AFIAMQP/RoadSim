@@ -20,7 +20,7 @@ classdef road < matlab.System
             IRI_0 = obj.IRI;
             x_last = zeros(obj.numSteps,1);
             IRI_last(i) = zeros(obj.numSteps,1);
-            for obj.numSteps
+            for i = 1:obj.numSteps
               if i == 1
                   IRI_last(i,1) = IRI_0;
                   x_last(1,1) = [0;0;0;0];
