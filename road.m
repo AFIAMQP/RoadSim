@@ -3,6 +3,7 @@ classdef road < matlab.System
        IRI 
        numSteps
        IRIArray
+       step
        Input
     end
     methods 
@@ -20,6 +21,7 @@ classdef road < matlab.System
             IRI_0 = obj.IRI;
             x_last = zeros(obj.numSteps,1);
             IRI_last(i) = zeros(obj.numSteps,1);
+            obj.step = zeros(obj.numSteps,1);
             for i = 1:obj.numSteps
               if i == 1
                   IRI_last(i,1) = IRI_0;
@@ -31,8 +33,9 @@ classdef road < matlab.System
                                (obj.IRI(i-1)- x_last(i-1))
                                z.z_u_dot_prime];
               end
-             Road_step(i) = RoadSolver(obj.IRIArray(i), IRI_last(i,1), x_last(i,1));
+             obj.step(i) = RoadSolver(obj.IRIArray(i), IRI_last(i,1), x_last(i,1));
              obj.Input(i) = Road_step(i).R;
             end
         end
     end
+end
