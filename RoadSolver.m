@@ -6,7 +6,7 @@ mu = 0.15;
 L = 250;
 syms  R
 syms z_s_prime z_s_dot_prime z_u_prime z_u_dot_prime 
-z_u_prime = IRI - z_last(2);
+z_u_prime = L*(IRI - z_last(2));
 iri_z = [L*IRI 
          (IRI - IRI_last)*L
          L*IRI
@@ -30,5 +30,9 @@ B = [0
      0
      (-k_1/mu)];
  eq = z == (A*X) + (B*R);
- Road = solve(eq);
+ Road_solve = solve(eq);
+ Road = [vpa(Road_solve.R)
+          vpa(Road_solve.z_s_prime)
+          vpa(Road_solve.z_s_dot_prime)
+          vpa(Road_solve.z_u_dot_prime)];
 end

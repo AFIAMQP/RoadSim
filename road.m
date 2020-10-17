@@ -21,21 +21,21 @@ classdef road < matlab.System
             IRI_0 = obj.IRI;
             x_last = zeros(obj.numSteps,4);
             IRI_last = zeros(obj.numSteps,1);
-            obj.step = zeros(obj.numSteps,4);
+            obj.step = zeros(obj.numSteps,4)
             obj.Input = zeros(obj.numSteps,1);
             for i = 1:obj.numSteps
               if i == 1
-                  IRI_last(i,1:4) = IRI_0;
+                  IRI_last(i) = IRI_0;
                   x_last(1,1:4) = [0;0;0;0];
               else
                   IRI_last(i,1) = obj.IRIArray(i-1);
-                  x_last(i,1:4) = [z.z_s_prime
-                               z.z_s_dot_prime
-                               (obj.IRI(i-1)- x_last(i-1))
-                               z.z_u_dot_prime];
+                  x_last(i,1:4) = [obj.step(i-1,2)
+                               obj.step(i-1,3)
+                               (obj.IRIArray(i-1)- x_last(i-1))
+                               obj.step(i-1,4)];
               end 
-             obj.step(i,1:4) = RoadSolver(obj.IRIArray(i), IRI_last(i,1), x_last(i,1:4)');
-             obj.Input(i) = Road_step(i).R;
+              obj.step(i,1:4) = RoadSolver(obj.IRIArray(i), IRI_last(i), x_last(i,1:4)');
+             obj.Input(i) =obj.step(i,1);
             end
         end
     end
