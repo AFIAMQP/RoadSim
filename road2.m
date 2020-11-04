@@ -15,7 +15,7 @@ classdef road2 < matlab.System
             obj.varianceCalc;
            obj.PathCreator;
             obj.Roadplot
-      end
+        end
         function varianceCalc(obj)
             obj.variance = obj.height/3.1;
         end
